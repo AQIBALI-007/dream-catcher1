@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Catcher \u2728</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Abstract Background -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    
+    <div class="glass-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-moon"></i>
+                <h2>Dream<span>Catcher</span></h2>
+            </div>
+            
+            <ul class="nav-links">
+                <li class="active" data-target="capture-view">
+                    <i class="fa-solid fa-feather"></i>
+                    <span>Capture</span>
+                </li>
+                <li data-target="journal-view">
+                    <i class="fa-solid fa-book-journal-whills"></i>
+                    <span>Journal</span>
+                </li>
+                <li data-target="insights-view">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Insights</span>
+                </li>
+                <li data-target="vault-view">
+                    <i class="fa-solid fa-vault"></i>
+                    <span>Vault</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- View 1: Capture -->
+            <section id="capture-view" class="view active-view">
+                <div class="header">
+                    <h1>Capture a Dream</h1>
+                    <p>What did you experience in your sleep?</p>
+                </div>
+                
+                <form id="dream-form">
+                    <div class="input-group">
+                        <div class="editor-toolbar">
+                            <button type="button" data-command="bold" title="Bold"><i class="fa-solid fa-bold"></i></button>
+                            <button type="button" data-command="italic" title="Italic"><i class="fa-solid fa-italic"></i></button>
+                            <button type="button" data-command="underline" title="Underline"><i class="fa-solid fa-underline"></i></button>
+                            <button type="button" data-command="strikeThrough" title="Strikethrough"><i class="fa-solid fa-strikethrough"></i></button>
+                            <div class="separator"></div>
+                            <button type="button" data-command="insertUnorderedList" title="Bullet List"><i class="fa-solid fa-list-ul"></i></button>
+                            <button type="button" data-command="insertOrderedList" title="Numbered List"><i class="fa-solid fa-list-ol"></i></button>
+                        </div>
+                        <div 
+                            id="dream-editor" 
+                            class="rich-editor" 
+                            contenteditable="true" 
+                            placeholder="I was flying over a glowing city, and suddenly..."
+                        ></div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary" id="btn-voice">
+                            <i class="fa-solid fa-microphone"></i> Voice Record
+                        </button>
+                        <button type="submit" class="btn primary">
+                            <i class="fa-solid fa-sparkles"></i> Analyze & Save
+                        </button>
+                    </div>
+                </form>
+
+                <div id="capture-feedback" class="feedback hidden">
+                    <div class="spinner"></div>
+                    <p>Uncovering themes & emotions...</p>
+                </div>
+            </section>
+
+            <!-- View 2: Journal -->
+            <section id="journal-view" class="view hidden">
+                <div class="header">
+                    <h1>Dream Journal</h1>
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="Search by theme, emotion, or keyword...">
+                    </div>
+                </div>
+                <div id="journal-list" class="journal-grid">
+                    <!-- Dreams injected here by JS -->
+                </div>
+            </section>
+
+            <!-- View 3: Insights -->
+            <section id="insights-view" class="view hidden">
+                <div class="header">
+                    <h1>Pattern Detection</h1>
+                    <p>Recurring themes from your subconscious.</p>
+                </div>
+                <div class="insights-container">
+                    <div class="stats-card">
+                        <h3>Top Themes</h3>
+                        <ul id="top-themes-list">
+                            <!-- Injected by JS -->
+                        </ul>
+                    </div>
+                    
+                    <div class="stats-card empty-state" id="no-insights">
+                        <i class="fa-solid fa-cloud"></i>
+                        <p>Not enough dreams yet. Keep dreaming!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View 4: Vault Gallery -->
+            <section id="vault-view" class="view hidden">
+                <div class="header">
+                    <h1>Private Vault Gallery</h1>
+                    <p>Your most private subconscious memories, secured.</p>
+                </div>
+
+                <div class="search-bar" style="margin-bottom: 2rem;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="vault-search-input" placeholder="Search your private vault...">
+                </div>
+
+                <div id="vault-list" class="journal-grid" style="min-height: 200px; margin-bottom: 3rem;">
+                    <!-- Private dreams injected here by JS -->
+                </div>
+
+                <div class="header" style="margin-top: 4rem; border-top: 1px solid var(--glass-border); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Vault Settings</h2>
+                    <div class="vault-header-actions">
+                        <button class="btn-kebab" id="btn-vault-menu"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                        <div class="dropdown-menu" id="vault-dropdown">
+                            <div class="dropdown-item" id="menu-update-pin">
+                                <i class="fa-solid fa-key"></i> Update Password
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-grid hidden" id="pin-update-section">
+                    <div class="stats-card">
+                        <h3>Change Vault PIN</h3>
+                        <p>Set a new 4-digit PIN for gallery access.</p>
+                        <div class="pin-input-group">
+                            <input type="password" id="new-pin" maxlength="4" placeholder="••••">
+                            <button class="btn secondary" id="btn-save-pin">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <!-- Main Lock Screen (App-wide) -->
+    <div id="app-lock-screen" class="modal hidden" style="background: rgba(14, 17, 26, 0.95); backdrop-filter: blur(20px);">
+        <div class="recorder-content">
+            <div class="recorder-visual">
+                <div class="mic-icon" style="background: var(--accent-1); box-shadow: 0 0 30px rgba(58, 134, 255, 0.5);">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+            <div class="recorder-info">
+                <h3>Vault Locked</h3>
+                <p id="lock-instruction" style="color: var(--text-muted); margin-top: 0.5rem;">Enter your PIN to continue</p>
+                <div class="pin-display" id="pin-display">_ _ _ _</div>
+            </div>
+            <div class="pin-pad">
+                <button class="pin-btn">1</button><button class="pin-btn">2</button><button class="pin-btn">3</button>
+                <button class="pin-btn">4</button><button class="pin-btn">5</button><button class="pin-btn">6</button>
+                <button class="pin-btn">7</button><button class="pin-btn">8</button><button class="pin-btn">9</button>
+                <button class="pin-btn secondary" id="btn-pin-clear">C</button>
+                <button class="pin-btn">0</button>
+                <button class="pin-btn secondary" id="btn-pin-del"><i class="fa-solid fa-delete-left"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Dream</h2>
+                <button id="close-modal" class="btn-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="edit-dream-form">
+                <input type="hidden" id="edit-dream-id">
+                <div class="input-group">
+                    <label for="edit-dream-input">Description</label>
+                    <textarea id="edit-dream-input" required></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="edit-themes-input">Themes (comma-separated)</label>
+                    <input type="text" id="edit-themes-input" placeholder="e.g. Flying, Adventure, Mystery">
+                </div>
+                <div class="input-group">
+                    <label for="edit-emotions-input">Emotions (comma-separated)</label>
+                    <input type="text" id="edit-emotions-input" placeholder="e.g. Happy, Anxious, Excited">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Voice Recorder Overlay -->
+    <div id="recorder-overlay" class="modal hidden">
+        <div class="recorder-content">
+            <div class="recorder-visual">
+                <div class="pulse-ring"></div>
+                <div class="mic-icon">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+                <div class="waveform">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+            
+            <div class="recorder-info">
+                <h3>Recording Dream...</h3>
+                <div id="record-timer">00:00</div>
+            </div>
+
+            <div class="recorder-actions">
+                <button id="btn-cancel-record" class="btn secondary">
+                    <i class="fa-solid fa-xmark"></i> Cancel
+                </button>
+                <button id="btn-stop-record" class="btn primary stop-btn">
+                    <i class="fa-solid fa-stop"></i> Stop & Transcribe
+                </button>
+            </div>
+
+            <div id="transcribe-status" class="hidden">
+                <div class="mini-spinner"></div>
+                <p>ElevenLabs is transcribing...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

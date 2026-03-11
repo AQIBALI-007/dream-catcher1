@@ -1,6 +1,5 @@
 import http from 'http';
 import fs from 'fs/promises';
-import { createReadStream } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import formidable from 'formidable';
@@ -8,7 +7,7 @@ import formidable from 'formidable';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB_FILE = path.join(__dirname, 'dreams.json');
 const ELEVEN_LABS_API_KEY = process.env.ELEVEN_LABS_API_KEY || 'sk_b62418c642655ae5a730621b4a27521a3826e68c237d7ea8'; // Add your key here
 

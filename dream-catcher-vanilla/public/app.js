@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = '/api';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Navigation Logic
@@ -38,13 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 1.5 Security & Lock Logic
-    let isLocked = localStorage.getItem('dream_lock_enabled') === 'true';
     let currentPin = localStorage.getItem('dream_lock_pin') || '0000';
     let enteredPin = '';
 
     const lockScreen = document.getElementById('app-lock-screen');
     const pinDisplay = document.getElementById('pin-display');
-    const lockStatusText = document.getElementById('lock-status-text');
 
     // intercept view switching if locked
     function checkLock(targetViewId) {

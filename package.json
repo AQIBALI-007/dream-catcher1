@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "",
-  "main": "index.js",
+  "main": "dream-catcher-vanilla/server.mjs",
   "scripts": {
+    "start": "node dream-catcher-vanilla/server.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,8 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "formidable": "^3.5.4",
-    "openai": "^6.27.0"
+    "formidable": "^3.5.4"
   },
   "devDependencies": {
     "@types/node": "^25.3.5",
